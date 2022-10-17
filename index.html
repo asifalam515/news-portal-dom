@@ -18,13 +18,56 @@
     <button  class="btn btn-info" >News</button>
     <button class="btn btn-danger">Portal</button>
     <button class="btn btn-success">News</button>
-    <button class="btn btn-primary">Blog</button>
+   <span><!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+      Blog
+    </button>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">FAQ</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+          
+            <h3>1.Different between Var vs Let vs Const?</h3>
+            <ul>
+              <li><p>var: 
+                  - hoisted (always declared at top of scope, global if none)
+                  - function scope
+                  <br>
+              let:
+                  - block scope
+                  - not redeclarable
+                  <br>
+              const: 
+                  - block scope
+                  - not reassignable
+                  - not redeclarable</p></li>
+                 <h3> 2.Arrow Function vs Regular Function?</h3>
+                 <li>Since regular functions are constructible, they can be called using the new keyword. However, the arrow functions are only callable and not constructible, i.e arrow functions can never be used as constructor functions. Hence, they can never be invoked with the new keyword.</li>
+                 <h3>Why we should use Template String?</h3>
+                 <li>Template strings are a powerful feature of modern JavaScript released in ES6. It lets us insert/interpolate variables and expressions into strings without needing to concatenate like in older versions of JavaScript. It allows us to create strings that are complex and contain dynamic elements.</li>
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Understood</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </span>
+  
     
 </nav>
 <hr>
 
 <section>
-    <div id="numberOfnews">
+    <div id="numberOfnews" class="bg-warning rounded m-5 text-primary">
         
     </div>
 </section>

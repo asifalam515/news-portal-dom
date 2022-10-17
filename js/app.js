@@ -60,7 +60,7 @@ const displaySingleDetails = single =>{
     detailContainer.innerHTML=`
     <h1 class="text-danger">No News Found</h1>
     `
-   
+    h1.innerText=`0`
 
    }
     for(const singleNews of single){
