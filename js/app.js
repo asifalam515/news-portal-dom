@@ -40,30 +40,28 @@ const displayCategoriesName=(categories)=>{
 const singleCategory = (single) =>{
     // console.log('get details of id', single);
     const url = `https://openapi.programming-hero.com/api/news/category/0${single}`;
-    console.log(url);
     
     fetch(url)
     .then(res => res.json())
     .then(data => displaySingleDetails(data.data));
 }
 const displaySingleDetails = single =>{
-    console.log(single)
+    
     const detailContainer = document.getElementById('single-category');
     detailContainer.innerHTML = ``;
    if(single.length==0){
     detailContainer.innerHTML=`
     <h1 class="text-danger">No News Found</h1>
     `
-    // console.log('not found');
+
    }
     for(const singleNews of single){
-        
-       console.log(singleNews.details.slice(0,200).concat('...'));
-        console.log(singleNews.author.name)
-        
+
+        // console.log(singleNews._id)
     
     const singleDiv = document.createElement('div');
     singleDiv.classList.add('card');
+
     singleDiv.innerHTML = `
 <div class="d-flex w-75 container justify-content-center">
 <div class="w-25">
@@ -77,7 +75,11 @@ const displaySingleDetails = single =>{
       <img  class="img-fluid rounded-5 w-25 h-50"  src=${singleNews.author.img ?singleNews.author.img:"No images found"} >
       <p class="card-text text-danger">${singleNews.author.name ?singleNews.author.name:"No Name Found"}</p>
     
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+    
+      <button onclick="loadModalDetails('${singleNews._id}')" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Details
+    </button>
+
   </div>
 
 
@@ -90,7 +92,41 @@ const displaySingleDetails = single =>{
 
 
 }
+// modal function:
+const loadModalDetails=(news_id)=>{
+    const url=`https://openapi.programming-hero.com/api/news/${news_id}`
+    fetch(url)
+    .then(res=>res.json())
+    .then(data=>displayModal(data.data))
 
+}
+const displayModal=(data)=>{
+    const modalContainer=document.getElementById('modal-container')
+    modalContainer.textContent=''
+for(const details of data){
+    console.log(details);
+    const modalDiv=document.createElement('div')
+    modalDiv.innerHTML=`
+    <div class="modal-header d-block" >
+    
+    <h3>${details.title}</h3>
+    <h5 class="modal-title" id="exampleModalLabel">Author:${details.author.name ? details.author.name :"no Data found"}</h5>
+    <h4>Rating:${details.rating.badge}</h4>
 
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    <P>Details${details.details}</P>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-primary">Okay</button>
+  </div>  
+    
+    `
+    modalContainer.appendChild(modalDiv)
+}
+}
+// loadModalDetails()
 
 loadAllNewsCategory()
