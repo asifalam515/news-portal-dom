@@ -12,9 +12,10 @@ const loadAllNewsCategory=()=>{
 // display all categories
 const displayCategoriesName=(categories)=>{
     // console.log(categories.news_category)
+    
     const data=categories.news_category
     const categoriesDiv=document.getElementById('categories')
-
+    
  data.forEach(category=>{
     // console.log(category);
     const categoryDiv=document.createElement('div')
@@ -29,7 +30,7 @@ const displayCategoriesName=(categories)=>{
 // categoryDiv.innerText=`${category.category_name}`
     categoriesDiv.appendChild(categoryDiv)
     
-    
+ 
  })
  
 
@@ -38,6 +39,7 @@ const displayCategoriesName=(categories)=>{
 
 // all news in a single category
 const singleCategory = (single) =>{
+  toggleSpinner(true)
     // console.log('get details of id', single);
     const url = `https://openapi.programming-hero.com/api/news/category/0${single}`;
     
@@ -46,18 +48,23 @@ const singleCategory = (single) =>{
     .then(data => displaySingleDetails(data.data));
 }
 const displaySingleDetails = single =>{
-    
+  console.log(single.length);
+    toggleSpinner(false)
     const detailContainer = document.getElementById('single-category');
+    const numberDiv=document.getElementById('numberOfnews')
+    numberDiv.textContent=''
+    const h1=document.createElement('h1')
+    h1.innerText=`Number of News is:${single.length?single.length:"Not Found"}`
     detailContainer.innerHTML = ``;
    if(single.length==0){
     detailContainer.innerHTML=`
     <h1 class="text-danger">No News Found</h1>
     `
+   
 
    }
     for(const singleNews of single){
 
-        // console.log(singleNews._id)
     
     const singleDiv = document.createElement('div');
     singleDiv.classList.add('card');
@@ -86,12 +93,14 @@ const displaySingleDetails = single =>{
 </div>
     `;
     detailContainer.appendChild(singleDiv);
+    numberDiv.appendChild(h1)
 
 
     }
 
 
 }
+
 // modal function:
 const loadModalDetails=(news_id)=>{
     const url=`https://openapi.programming-hero.com/api/news/${news_id}`
@@ -101,6 +110,7 @@ const loadModalDetails=(news_id)=>{
 
 }
 const displayModal=(data)=>{
+
     const modalContainer=document.getElementById('modal-container')
     modalContainer.textContent=''
 for(const details of data){
@@ -127,6 +137,24 @@ for(const details of data){
     modalContainer.appendChild(modalDiv)
 }
 }
+
+
+
+
+// spinner
+const toggleSpinner=isLoading=>{
+  const loaderSection=document.getElementById('loader')
+  if(isLoading){
+    loaderSection.classList.remove('d-none')
+  }else{
+    loaderSection.classList.add('d-none')
+  }
+
+
+}
+
+
+
 // loadModalDetails()
 
 loadAllNewsCategory()
