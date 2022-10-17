@@ -52,34 +52,39 @@ const displaySingleDetails = single =>{
     toggleSpinner(false)
     const detailContainer = document.getElementById('single-category');
     const numberDiv=document.getElementById('numberOfnews')
-    numberDiv.textContent=''
+    numberDiv.innerHTML=''
     const h1=document.createElement('h1')
     h1.innerText=`Number of News is:${single.length?single.length:"Not Found"}`
     detailContainer.innerHTML = ``;
    if(single.length==0){
     detailContainer.innerHTML=`
     <h1 class="text-danger">No News Found</h1>
-    `
-    h1.innerText=`0`
+    
+    
+  `
+
+    
 
    }
     for(const singleNews of single){
 
     
     const singleDiv = document.createElement('div');
+    singleDiv.classList.add('m-2');
     singleDiv.classList.add('card');
+    singleDiv.classList.add('rounded');
 
     singleDiv.innerHTML = `
 <div class="d-flex w-75 container justify-content-center">
-<div class="w-25">
+<div class="w-50">
 <img  class="img-fluid"  src=" ${singleNews.image_url ?singleNews.image_url :"No images found"}" >
 </div>
-  <div class="card-body w-75 m-3 p-2">
+  <div class="card-body w-50 m-3 p-2">
   <h5>${singleNews.title? singleNews.title :'No Tittle Found'}</h5>
       <small class="card-title"> ${singleNews.details ?singleNews.details.slice(0,200).concat('...') :'No Details Found'}</small>
       <p class="card-text text-info">Total View:${singleNews.total_view?singleNews.total_view:"No Name Found"}</p>
       
-      <img  class="img-fluid rounded-5 w-25 h-50"  src=${singleNews.author.img ?singleNews.author.img:"No images found"} >
+      <img  class="img-fluid rounded-5 w-25"  src=${singleNews.author.img ?singleNews.author.img:"No images found"} >
       <p class="card-text text-danger">${singleNews.author.name ?singleNews.author.name:"No Name Found"}</p>
     
     
