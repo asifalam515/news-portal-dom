@@ -72,9 +72,11 @@ const displaySingleDetails = single =>{
   <div class="card-body w-75 m-3 p-2">
   <h5>${singleNews.title? singleNews.title :'No Tittle Found'}</h5>
       <small class="card-title"> ${singleNews.details ?singleNews.details.slice(0,200).concat('...') :'No Details Found'}</small>
-      <p class="card-text text-danger">${singleNews.author.name ?singleNews.author.name:"No Name Found"}</p>
-      <img  class="img-fluid rounded-5 w-25 h-50"  src=${singleNews.author.img ?singleNews.author.img:"No images found"} >
       <p class="card-text text-info">Total View:${singleNews.total_view?singleNews.total_view:"No Name Found"}</p>
+      
+      <img  class="img-fluid rounded-5 w-25 h-50"  src=${singleNews.author.img ?singleNews.author.img:"No images found"} >
+      <p class="card-text text-danger">${singleNews.author.name ?singleNews.author.name:"No Name Found"}</p>
+    
       <a href="#" class="btn btn-primary">Go somewhere</a>
   </div>
 
