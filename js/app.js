@@ -1,9 +1,13 @@
 // fetch data
 const loadAllNewsCategory=()=>{
+   try{
     const url=`https://openapi.programming-hero.com/api/news/categories`
     fetch(url)
     .then(res=>res.json())
     .then(data=>displayCategoriesName(data.data))
+   } catch(err){
+    console.log(err);
+   }
 }
 
 // 
@@ -48,7 +52,7 @@ const singleCategory = (single) =>{
     .then(data => displaySingleDetails(data.data));
 }
 const displaySingleDetails = single =>{
-  console.log(single.length);
+  // console.log(single.length);
     toggleSpinner(false)
     const detailContainer = document.getElementById('single-category');
     const numberDiv=document.getElementById('numberOfnews')
@@ -124,6 +128,7 @@ for(const details of data){
     modalDiv.innerHTML=`
     <div class="modal-header d-block" >
     
+    <img  class="img-fluid"  src=" ${details.thumbnail_url }" >
     <h3>${details.title}</h3>
     <h5 class="modal-title" id="exampleModalLabel">Author:${details.author.name ? details.author.name :"no Data found"}</h5>
     <h4>Rating:${details.rating.badge}</h4>
@@ -131,7 +136,9 @@ for(const details of data){
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
   </div>
   <div class="modal-body">
-    <P>Details${details.details}</P>
+    <P>Details: ${details.details}</P>
+    <P>Published Date:${details.author.published_date ?details.author.published_date :"not found"}</P>
+    <br>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
